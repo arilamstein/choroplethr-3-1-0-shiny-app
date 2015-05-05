@@ -6,28 +6,48 @@ library(shiny)
 library(choroplethr)
 library(choroplethrMaps)
 
-data(df_state_demographics, package="choroplethr", envir=environment())
+# the state and county demographics are in these two data.frames. 
+# first column is a list of regions. each subseqent column is a value
+data(df_state_demographics , package="choroplethr", envir=environment())
 data(df_county_demographics, package="choroplethr", envir=environment())
 
 shinyServer(function(input, output) {
   
-  output$map_state = renderPlot({
-    title=input$demographic
-    num_colors = as.numeric(input$num_colors)
-    df_state_demographics$value = df_state_demographics[, input$demographic]
-    state_choropleth(df_state_demographics, title=title, num_colors=num_colors)
+  # render the boxplot
+  output$boxplot = renderPlot({
+    # prepare the data
+    title                        = input$demographic
+    df_state_demographics$value  = df_state_demographics[, input$demographic]
+    df_county_demographics$value = df_county_demographics[, input$demographic]
+    
+    #render
+    boxplot(df_state_demographics$value, 
+            df_county_demographics$value, 
+            main  = title, 
+            names = c("State", "County"))
   })
   
-  output$map_county = renderPlot({
-    title=input$demographic
-    num_colors = as.numeric(input$num_colors)
-    df_county_demographics$value = df_county_demographics[, input$demographic]
-    county_choropleth(df_county_demographics, title=title, num_colors=num_colors)
-  })
-
-  output$boxplot = renderPlot({
-    title=input$demographic
+  # render the state choropleth map
+  output$map_state = renderPlot({
+    # prepare the data
+    title                       = input$demographic
+    num_colors                  = as.numeric(input$num_colors)
     df_state_demographics$value = df_state_demographics[, input$demographic]
-    boxplot(df_state_demographics$value, main=title)
+    
+    # render
+    state_choropleth(df_state_demographics, 
+                     title      = title, 
+                     num_colors = num_colors)
+  })
+  
+  # render the county choropleth map
+  output$map_county = renderPlot({
+    # prepare the data
+    title                        = input$demographic
+    num_colors                   = as.numeric(input$num_colors)
+    df_county_demographics$value = df_county_demographics[, input$demographic]
+    
+    # render
+    county_choropleth(df_county_demographics, title=title, num_colors=num_colors)
   })
 })
