@@ -19,7 +19,7 @@ shinyUI(fluidPage(
       selectInput("num_colors",
                   "Select number of colors",
                   1:9,
-                  selected=7)      
+                  selected=1)      
     ),
 
     mainPanel(
