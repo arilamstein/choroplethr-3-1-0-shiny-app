@@ -14,7 +14,7 @@ shinyUI(fluidPage(
       selectInput("demographic",
                   label = "Select demographic",
                   choices = demographic_choices,
-                  selected = "percent_white"),
+                  selected = "total_population"),
       
       selectInput("num_colors",
                   "Select number of colors",

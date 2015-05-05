@@ -11,12 +11,14 @@ library(choroplethrMaps)
 data(df_state_demographics , package="choroplethr", envir=environment())
 data(df_county_demographics, package="choroplethr", envir=environment())
 
+title_first_part = "2013 5-Year American Community Survey:\n"
+
 shinyServer(function(input, output) {
   
   # render the boxplot
   output$boxplot = renderPlot({
     # prepare the data
-    title                        = input$demographic
+    title                        = paste0(title_first_part, input$demographic)
     df_state_demographics$value  = df_state_demographics[, input$demographic]
     df_county_demographics$value = df_county_demographics[, input$demographic]
     
@@ -30,7 +32,7 @@ shinyServer(function(input, output) {
   # render the state choropleth map
   output$map_state = renderPlot({
     # prepare the data
-    title                       = input$demographic
+    title                       = paste0(title_first_part, input$demographic)
     num_colors                  = as.numeric(input$num_colors)
     df_state_demographics$value = df_state_demographics[, input$demographic]
     
@@ -43,7 +45,7 @@ shinyServer(function(input, output) {
   # render the county choropleth map
   output$map_county = renderPlot({
     # prepare the data
-    title                        = input$demographic
+    title                        = paste0(title_first_part, input$demographic)
     num_colors                   = as.numeric(input$num_colors)
     df_county_demographics$value = df_county_demographics[, input$demographic]
     
