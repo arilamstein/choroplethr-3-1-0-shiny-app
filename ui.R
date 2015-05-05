@@ -7,8 +7,10 @@ demographic_choices = colnames(df_state_demographics)[2:ncol(df_state_demographi
 
 shinyUI(fluidPage(
 
-  titlePanel("Explore Demographic Data from choroplethr v3.1.0"),
+  titlePanel("Demographic Data from choroplethr v3.1.0"),
 
+  fluidRow(column(12, includeMarkdown("text.md"))),
+  
   sidebarLayout(
     sidebarPanel(      
       selectInput("demographic",
