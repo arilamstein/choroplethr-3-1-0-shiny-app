@@ -1,10 +1,11 @@
-list.of.packages <- c("choroplethr", "choroplethrMaps", "shiny")
+list.of.packages <- c("choroplethr", "choroplethrMaps", "shiny", "markdown")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 
 library(shiny)
 library(choroplethr)
 library(choroplethrMaps)
+require(markdown)
 
 # the state and county demographics are in these two data.frames. 
 # first column is a list of regions. each subseqent column is a value
