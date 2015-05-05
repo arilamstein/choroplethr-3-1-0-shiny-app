@@ -17,6 +17,11 @@ shinyServer(function(input, output) {
   
   # render the boxplot
   output$boxplot = renderPlot({
+    # add a progress bar
+    progress = shiny::Progress$new()
+    on.exit(progress$close())
+    progress$set(message = "Creating image. Please wait.", value = 0)
+    
     # prepare the data
     title                        = paste0(title_first_part, input$demographic)
     df_state_demographics$value  = df_state_demographics[, input$demographic]
@@ -31,6 +36,11 @@ shinyServer(function(input, output) {
   
   # render the state choropleth map
   output$map_state = renderPlot({
+    # add a progress bar
+    progress = shiny::Progress$new()
+    on.exit(progress$close())
+    progress$set(message = "Creating image. Please wait.", value = 0)
+    
     # prepare the data
     title                       = paste0(title_first_part, input$demographic)
     num_colors                  = as.numeric(input$num_colors)
@@ -44,6 +54,11 @@ shinyServer(function(input, output) {
   
   # render the county choropleth map
   output$map_county = renderPlot({
+    # add a progress bar
+    progress = shiny::Progress$new()
+    on.exit(progress$close())
+    progress$set(message = "Creating image. Please wait.", value = 0)
+    
     # prepare the data
     title                        = paste0(title_first_part, input$demographic)
     num_colors                   = as.numeric(input$num_colors)
