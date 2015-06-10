@@ -1,0 +1,7 @@
+.Rproj.user
+.Rhistory
+.RData
+*.Rproj
+*.dcf
+text.html
+shinyapps/arilamstein/choroplethr-3-1-0-shiny-app.dcf
